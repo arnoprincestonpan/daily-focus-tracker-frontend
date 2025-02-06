@@ -1,5 +1,6 @@
 import './App.css'
 import { useState } from 'react';
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
     // to avoid magic numbers
@@ -50,7 +51,7 @@ function App() {
       setEditGoalID(""); 
       setGoals(
         [...goals, {
-          id: ++goals.length,
+          id: uuidv4(),
           date: Date.now(),
           text: newGoal,
           completed: false
