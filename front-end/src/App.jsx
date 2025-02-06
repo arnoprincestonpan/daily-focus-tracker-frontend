@@ -29,19 +29,10 @@ function App() {
             {
               goals.slice(0,3).map((goal) => (
                 <li key={goal.id}>
-                  Top #{goal.id}: "{goal.text}"
+                  Top #{goal.id}: "{goal.text}" <button>Complete</button> - <button>Edit</button> - <button>Delete</button>
                 </li>
               ))
             }
-            <li>
-              Goal 1 <button>Complete</button> - <button>Edit</button> - <button>Delete</button>
-            </li>
-            <li>
-              Goal 2 <button>Complete</button> - <button>Edit</button> - <button>Delete</button>
-            </li>
-            <li>
-              Goal 3 <button>Complete</button> - <button>Edit</button> - <button>Delete</button>
-            </li>
           </ul>
         </div>
 
@@ -49,9 +40,13 @@ function App() {
         <div className="additional-goals">
           <h2>Other Goals</h2>
           <ul>
-            <li>
-              Goal 4 <button>Complete</button> - <button>Edit</button> - <button>Delete</button>
-            </li>
+            {
+              goals.slice(3).map((goals) => (
+                <li key={goals.id}>
+                  Goal {goals.id}: {goals.text} <button>Complete</button> - <button>Edit</button> - <button>Delete</button>
+                </li>
+              ))
+            }
           </ul>
         </div>
 
