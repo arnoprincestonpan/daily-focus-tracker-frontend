@@ -1,6 +1,16 @@
 import './App.css'
+import { useState } from 'react';
 
 function App() {
+
+  // Array of Goals Objects using useState to update and track
+  const [goals, setGoals] = useState([
+    { id: 1, text: "Goal 1", completed: false},
+    { id: 2, text: "Goal 2", completed: false},
+    { id: 3, text: "Goal 3", completed: false},
+    { id: 4, text: "Goal 4", completed: false},
+    { id: 5, text: "Goal 5", completed: false}
+  ]);
 
   return (
     <div className="app-container">
