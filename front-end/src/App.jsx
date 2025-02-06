@@ -3,19 +3,27 @@ import { useState } from 'react';
 
 function App() {
 
-  // Array of Goals Objects using useState to update and track
-  const [goals, setGoals] = useState([
-    { id: 1, date: 1696886400000, text: "Take a shower.", completed: false},
-    { id: 2, date: 1696886400000, text: "Read a book.", completed: false},
-    { id: 3, date: 1696713600000, text: "Eat some food.", completed: false},
-    { id: 4, date: 1696627200000, text: "Clean the apartment.", completed: false},
-    { id: 5, date: 1696886400000, text: "Talk to friends and family.", completed: false}
-  ]);
+    // Array of Goals Objects using useState to update and track
+    const [goals, setGoals] = useState([
+      { id: 1, date: 1696886400000, text: "Take a shower.", completed: false},
+      { id: 2, date: 1696886400000, text: "Read a book.", completed: false},
+      { id: 3, date: 1696713600000, text: "Eat some food.", completed: false},
+      { id: 4, date: 1696627200000, text: "Clean the apartment.", completed: false},
+      { id: 5, date: 1696886400000, text: "Talk to friends and family.", completed: false}
+    ]);
 
-  // Keep track of new Goal to be added (using input in Input Section)
-  const [newGoal, setNewGoal] = useState("");
+    // Keep track of new Goal to be added (using input in Input Section)
+    const [newGoal, setNewGoal] = useState("");
 
-    // Handle Adding Goals
+    // Keep track of what goal you want to edit by saving the goal.id
+    const [editGoalID, setEditGoalID] = useState("");
+
+    // Handle Editing Goal
+    // const editGoal = (goalID) =>{
+    //   setEditGoalID(null);
+    // }
+
+    // Handle Adding Goal
     const addGoal = () => {
       if(newGoal === "") {
         alert("Goal has not been entered.")
@@ -24,7 +32,8 @@ function App() {
       }
 
       console.log(`Goal: \"${newGoal}\" has been entered in input.`);
-
+      setNewGoal("");
+      setEditGoalID(""); 
       setGoals(
         [...goals, {
           id: ++goals.length,
@@ -57,7 +66,7 @@ function App() {
 
     // Handle Date.now dates of goals
     const formatDateToMonthDayYear = (dateInteger) => {
-      // console.log(typeof(dateInteger));
+      // console.log(typeof(dateInteger));6
 
       const date = new Date(dateInteger);
       // console.log(typeof(date));
@@ -87,7 +96,20 @@ function App() {
             {
               goals.slice(0,3).map((goal) => (
                 <li key={goal.id}>
-                  Top #{goal.id} - Date: {formatDateToMonthDayYear(goal.date)} <br/>"{goal.text}" <button onClick={() => toggleComplete(goal.id)}>{goal.completed ? "Completed" : "InComplete"}</button> - <button>Edit</button> - <button onClick={() => deleteGoal(goal.id)}>Delete</button>
+                  Goal #{goal.id} - Date: {formatDateToMonthDayYear(goal.date)} - <button onClick={() => toggleComplete(goal.id)}>{goal.completed ? "Completed" : "InComplete"}</button> 
+                  - <button onClick={() => deleteGoal(goal.id)}>Delete</button>
+                  <br/>
+                  { editGoalID === goal.id? 
+                    <>
+                    {/* <p>editGoalID is {editGoalID}</p> */}
+                    <input type="text" placeholder={goal.text} value={newGoal} onChange={(e) => setNewGoal(e.target.value)}/> - <button onClick={() => addGoal()}>Save</button>
+                    </>
+                    : 
+                    <>
+                    {/* <p>editGoalID is Empty</p> */}
+                    <p>"{goal.text}" - <button onClick={() => setEditGoalID(goal.id)}>Edit</button></p>
+                    </>
+                  }
                 </li>
               ))
             }
@@ -101,7 +123,20 @@ function App() {
             {
               goals.slice(3).map((goal) => (
                 <li key={goal.id}>
-                  Goal #{goal.id} - Date: {formatDateToMonthDayYear(goal.date)} <br/>"{goal.text}" <button onClick={() => toggleComplete(goal.id)}>{goal.completed ? "Completed" : "InComplete"}</button> - <button>Edit</button> - <button onClick={() => deleteGoal(goal.id)}>Delete</button>
+                  Goal #{goal.id} - Date: {formatDateToMonthDayYear(goal.date)} - <button onClick={() => toggleComplete(goal.id)}>{goal.completed ? "Completed" : "InComplete"}</button> 
+                  - <button onClick={() => deleteGoal(goal.id)}>Delete</button>
+                  <br/>
+                  { editGoalID === goal.id? 
+                    <>
+                    {/* <p>editGoalID is {editGoalID}</p> */}
+                    <input type="text" placeholder={goal.text} value={newGoal} onChange={(e) => setNewGoal(e.target.value)}/> - <button onClick={() => addGoal()}>Save</button>
+                    </>
+                    : 
+                    <>
+                    {/* <p>editGoalID is Empty</p> */}
+                    <p>"{goal.text}" - <button onClick={() => setEditGoalID(goal.id)}>Edit</button></p>
+                    </>
+                  }
                 </li>
               ))
             }
