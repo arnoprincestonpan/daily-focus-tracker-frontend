@@ -36,6 +36,18 @@ function App() {
 
     }
 
+    // Handle Deleting Goal
+    const deleteGoal = (goalID) => {
+      const newGoal = goals.filter((goal) => goal.id !== goalID);
+      if(newGoal === null) {
+        console.log(`Goal #${goalID} doesn't exist.`);
+        alert(`Goal #${goalID} does not exist.`);
+        return;
+      }
+      console.log(`Goal #${goalID} exists, therefore can be removed.`);
+      setGoals(newGoal);
+    };
+
     // Handle Date.now dates of goals
     const formatDateToMonthDayYear = (dateInteger) => {
       // console.log(typeof(dateInteger));
@@ -68,7 +80,7 @@ function App() {
             {
               goals.slice(0,3).map((goal) => (
                 <li key={goal.id}>
-                  Top #{goal.id} - Date: {formatDateToMonthDayYear(goal.date)} <br/>"{goal.text}" <button>Complete</button> - <button>Edit</button> - <button>Delete</button>
+                  Top #{goal.id} - Date: {formatDateToMonthDayYear(goal.date)} <br/>"{goal.text}" <button>Complete</button> - <button>Edit</button> - <button onClick={() => deleteGoal(goal.id)}>Delete</button>
                 </li>
               ))
             }
