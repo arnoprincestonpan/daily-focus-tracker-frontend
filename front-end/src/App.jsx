@@ -19,9 +19,21 @@ function App() {
     const [editGoalID, setEditGoalID] = useState("");
 
     // Handle Editing Goal
-    // const editGoal = (goalID) =>{
-    //   setEditGoalID(null);
-    // }
+    const editGoal = (goalID) =>{
+      if(newGoal === ""){
+        setEditGoalID("");
+        console.log(`New Goal: ${newGoal} is blank. editGoalID is reset.`);
+        return;
+      }
+
+      if(!editGoalID){
+        console.log(`Edit Goal ID: ${editGoalID} Check.`)
+        return;
+      }
+      
+      const newGoals = () => (goals => goals.map(goal => goal.id === editGoalID ? {...goal, text: newGoal} : goal))
+      setGoals(newGoals);
+    }
 
     // Handle Adding Goal
     const addGoal = () => {
@@ -102,7 +114,7 @@ function App() {
                   { editGoalID === goal.id? 
                     <>
                     {/* <p>editGoalID is {editGoalID}</p> */}
-                    <input type="text" placeholder={goal.text} value={newGoal} onChange={(e) => setNewGoal(e.target.value)}/> - <button onClick={() => addGoal()}>Save</button>
+                    <input type="text" placeholder={goal.text} value={newGoal} onChange={(e) => setNewGoal(e.target.value)}/> - <button onClick={() => editGoal()}>Save</button>
                     </>
                     : 
                     <>
@@ -129,7 +141,7 @@ function App() {
                   { editGoalID === goal.id? 
                     <>
                     {/* <p>editGoalID is {editGoalID}</p> */}
-                    <input type="text" placeholder={goal.text} value={newGoal} onChange={(e) => setNewGoal(e.target.value)}/> - <button onClick={() => addGoal()}>Save</button>
+                    <input type="text" placeholder={goal.text} value={newGoal} onChange={(e) => setNewGoal(e.target.value)}/> - <button onClick={() => editGoal()}>Save</button>
                     </>
                     : 
                     <>
