@@ -26,6 +26,13 @@ function App() {
         <div className="goals-list"> 
           <h2>Today's Goals</h2>
           <ul>
+            {
+              goals.slice(0,3).map((goal) => (
+                <li key={goal.id}>
+                  Top #{goal.id}: "{goal.text}"
+                </li>
+              ))
+            }
             <li>
               Goal 1 <button>Complete</button> - <button>Edit</button> - <button>Delete</button>
             </li>
