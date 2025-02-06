@@ -2,6 +2,8 @@ import './App.css'
 import { useState } from 'react';
 
 function App() {
+    // to avoid magic numbers
+    const topTasks = 3;
 
     // Array of Goals Objects using useState to update and track
     const [goals, setGoals] = useState([
@@ -106,9 +108,9 @@ function App() {
           <h2>Today's Goals</h2>
           <ul>
             {
-              goals.slice(0,3).map((goal) => (
+              goals.slice(0,topTasks).map((goal, goalIndex) => (
                 <li key={goal.id}>
-                  Goal #{goal.id} - Date: {formatDateToMonthDayYear(goal.date)} - <button onClick={() => toggleComplete(goal.id)}>{goal.completed ? "Completed" : "InComplete"}</button> 
+                  Goal #{++goalIndex} - Date: {formatDateToMonthDayYear(goal.date)} - <button onClick={() => toggleComplete(goal.id)}>{goal.completed ? "Completed" : "InComplete"}</button> 
                   - <button onClick={() => deleteGoal(goal.id)}>Delete</button>
                   <br/>
                   { editGoalID === goal.id? 
@@ -133,9 +135,9 @@ function App() {
           <h2>Other Goals</h2>
           <ul>
             {
-              goals.slice(3).map((goal) => (
+              goals.slice(topTasks).map((goal, goalIndex) => (
                 <li key={goal.id}>
-                  Goal #{goal.id} - Date: {formatDateToMonthDayYear(goal.date)} - <button onClick={() => toggleComplete(goal.id)}>{goal.completed ? "Completed" : "InComplete"}</button> 
+                  Goal #{(topTasks + ++goalIndex)} - Date: {formatDateToMonthDayYear(goal.date)} - <button onClick={() => toggleComplete(goal.id)}>{goal.completed ? "Completed" : "InComplete"}</button> 
                   - <button onClick={() => deleteGoal(goal.id)}>Delete</button>
                   <br/>
                   { editGoalID === goal.id? 
