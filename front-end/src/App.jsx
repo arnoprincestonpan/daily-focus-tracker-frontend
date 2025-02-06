@@ -48,6 +48,9 @@ function App() {
       setGoals(newGoal);
     };
 
+    // Handle Complete Toggle Goal
+
+
     // Handle Date.now dates of goals
     const formatDateToMonthDayYear = (dateInteger) => {
       // console.log(typeof(dateInteger));
@@ -80,7 +83,7 @@ function App() {
             {
               goals.slice(0,3).map((goal) => (
                 <li key={goal.id}>
-                  Top #{goal.id} - Date: {formatDateToMonthDayYear(goal.date)} <br/>"{goal.text}" <button>Complete</button> - <button>Edit</button> - <button onClick={() => deleteGoal(goal.id)}>Delete</button>
+                  Top #{goal.id} - Date: {formatDateToMonthDayYear(goal.date)} <br/>"{goal.text}" <button>{goal.completed === true ? "Completed" : "InComplete"}</button> - <button>Edit</button> - <button onClick={() => deleteGoal(goal.id)}>Delete</button>
                 </li>
               ))
             }
@@ -94,7 +97,7 @@ function App() {
             {
               goals.slice(3).map((goal) => (
                 <li key={goal.id}>
-                  Goal #{goal.id} - Date: {formatDateToMonthDayYear(goal.date)} <br/>"{goal.text}" <button>Complete</button> - <button>Edit</button> - <button>Delete</button>
+                  Goal #{goal.id} - Date: {formatDateToMonthDayYear(goal.date)} <br/>"{goal.text}" <button>{goal.completed === true ? "Completed" : "InComplete"}</button> - <button>Edit</button> - <button onClick={() => deleteGoal(goal.id)}>Delete</button>
                 </li>
               ))
             }
