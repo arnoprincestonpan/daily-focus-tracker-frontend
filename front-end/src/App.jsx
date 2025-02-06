@@ -5,11 +5,11 @@ function App() {
 
   // Array of Goals Objects using useState to update and track
   const [goals, setGoals] = useState([
-    { id: 1, date: 1696886400000, text: "Goal 1", completed: false},
-    { id: 2, date: 1696800000000, text: "Goal 2", completed: false},
-    { id: 3, date: 1696713600000, text: "Goal 3", completed: false},
-    { id: 4, date: 1696627200000, text: "Goal 4", completed: false},
-    { id: 5, date: 1696886400000, text: "Goal 5", completed: false}
+    { id: 1, date: 1696886400000, text: "Take a shower.", completed: false},
+    { id: 2, date: 1696886400000, text: "Read a book.", completed: false},
+    { id: 3, date: 1696713600000, text: "Eat some food.", completed: false},
+    { id: 4, date: 1696627200000, text: "Clean the apartment.", completed: false},
+    { id: 5, date: 1696886400000, text: "Talk to friends and family.", completed: false}
   ]);
 
   // Keep track of new Goal to be added (using input in Input Section)
@@ -36,6 +36,21 @@ function App() {
 
     }
 
+    // Handle Date.now dates of goals
+    const formatDateToMonthDayYear = (dateInteger) => {
+      // console.log(typeof(dateInteger));
+
+      const date = new Date(dateInteger);
+      // console.log(typeof(date));
+
+      const year = date.getFullYear();
+      // const month = date.getMonth();
+      const month = date.toLocaleDateString("en-CA", {month: 'long'});
+      const day = date.getDay();
+
+      return(`${month} ${day}, ${year}`);
+    }
+
   return (
     <div className="app-container">
         <h1>Daily Focus Tracker</h1>
@@ -53,7 +68,7 @@ function App() {
             {
               goals.slice(0,3).map((goal) => (
                 <li key={goal.id}>
-                  Top #{goal.id} - Date: {Date(goal.date)} "{goal.text}" <button>Complete</button> - <button>Edit</button> - <button>Delete</button>
+                  Top #{goal.id} - Date: {formatDateToMonthDayYear(goal.date)} <br/>"{goal.text}" <button>Complete</button> - <button>Edit</button> - <button>Delete</button>
                 </li>
               ))
             }
@@ -65,9 +80,9 @@ function App() {
           <h2>Other Goals</h2>
           <ul>
             {
-              goals.slice(3).map((goals) => (
-                <li key={goals.id}>
-                  Goal {goals.id}: {goals.text} <button>Complete</button> - <button>Edit</button> - <button>Delete</button>
+              goals.slice(3).map((goal) => (
+                <li key={goal.id}>
+                  Goal #{goal.id} - Date: {formatDateToMonthDayYear(goal.date)} <br/>"{goal.text}" <button>Complete</button> - <button>Edit</button> - <button>Delete</button>
                 </li>
               ))
             }
